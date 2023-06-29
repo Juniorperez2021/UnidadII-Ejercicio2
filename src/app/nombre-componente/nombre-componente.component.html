@@ -1,0 +1,20 @@
+<form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="edad">Edad:</label>
+    <input type="text" id="edad" formControlName="edad">
+    <div *ngIf="formulario.get('edad')?.invalid && (formulario.get('edad')?.dirty || formulario.get('edad')?.touched)">
+      <div *ngIf="formulario.get('edad')?.errors?.['required']">La edad es requerida.</div>
+      <div *ngIf="formulario.get('edad')?.errors?.['min'] || formulario.get('edad')?.errors?.['max']">La edad debe estar entre 0 y 100.</div>
+      <div *ngIf="formulario.get('edad')?.errors?.['pattern']">La edad solo debe contener números.</div>
+    </div>
+  </div>
+  <div>
+    <label for="sitioWeb">Sitio Web:</label>
+    <input type="text" id="sitioWeb" formControlName="sitioWeb">
+    <div *ngIf="formulario.get('sitioWeb')?.invalid && (formulario.get('sitioWeb')?.dirty || formulario.get('sitioWeb')?.touched)">
+      <div *ngIf="formulario.get('sitioWeb')?.errors?.['required']">El sitio web es requerido.</div>
+      <div *ngIf="formulario.get('sitioWeb')?.errors?.['pattern']">El formato del sitio web no es válido.</div>
+    </div>
+  </div>
+  <button type="submit" [disabled]="formulario.invalid">Enviar</button>
+</form>
